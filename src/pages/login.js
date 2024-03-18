@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 
-const Login = () => {
+const LoginPage = () => {
 	return (
 		<>
 			<Head>
@@ -53,4 +53,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default LoginPage;
