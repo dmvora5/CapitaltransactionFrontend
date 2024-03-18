@@ -4,23 +4,40 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useAddEquipmentMutation, useGetAllCategorysQuery } from "@/redux/api/userItemsApi";
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from "@/components/ui/form";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+import {
+	useAddEquipmentMutation,
+	useGetAllCategorysQuery,
+} from "@/redux/api/userItemsApi";
 import APICallStatushandler from "@/components/Shared/APICallStatushandler";
 import Loader from "@/components/Shared/Loader";
 
 const Equipment = () => {
+	const [images, setImages] = useState([
+		{
+			error: "",
+			value: "",
+			url: "",
+		},
+	]);
 
-	const [images, setImages] = useState([{
-		error: '',
-		value: '',
-		url: ''
-	}]);
-
-	const { data, isLoading, isSuccess, isError, error } = useGetAllCategorysQuery({ type: 'Equipment' })
+	const { data, isLoading, isSuccess, isError, error } =
+		useGetAllCategorysQuery({ type: "Equipment" });
 	const [submit, addEquipmentOption] = useAddEquipmentMutation();
-
 
 	const formSchema = z.object({
 		vehicalIdetificationNo: z.string().min(2, {
@@ -44,7 +61,7 @@ const Equipment = () => {
 		address: z.string(),
 		cateroryId: z.string(),
 		OddMeterBrand: z.string(),
-		PriorTitleNo: z.string()
+		PriorTitleNo: z.string(),
 	});
 
 	const form = useForm({
@@ -52,64 +69,62 @@ const Equipment = () => {
 		defaultValues: {},
 	});
 
-
 	useEffect(() => {
-		if(isSuccess && data) {
-			form.setValue('cateroryId', data?.data[0]?._id)
+		if (isSuccess && data) {
+			form.setValue("cateroryId", data?.data[0]?._id);
 		}
-	},[isSuccess, data, form])
-
+	}, [isSuccess, data, form]);
 
 	const handleAddImageField = () => {
 		if (images.length >= 4) return;
-		setImages(state => [...state, {
-			error: '',
-			value: ''
-		}])
-	}
+		setImages((state) => [
+			...state,
+			{
+				error: "",
+				value: "",
+			},
+		]);
+	};
 
 	const removeImages = (index) => {
 		if (index <= 0) return;
 		const copyImagesState = [...images];
 		copyImagesState.splice(index, 1);
 		setImages(copyImagesState);
-	}
+	};
 
 	const handleSubmit = (values) => {
-		console.log('values', values)
+		console.log("values", values);
 		let valid = true;
-		const copyImageState = images.map(image => {
+		const copyImageState = images.map((image) => {
 			if (!image.value) {
-				image.error = 'please enter valid image'
-				valid = false
+				image.error = "please enter valid image";
+				valid = false;
 			}
-			return image
-		})
+			return image;
+		});
 		setImages(copyImageState);
 		if (!valid) return;
 		const formData = new FormData();
 		Object.keys(values).forEach((key) => {
 			formData.append(key, values[key]);
 		});
-		images.forEach(image => {
+		images.forEach((image) => {
 			formData.append("images[]", image.value);
 		});
 		submit(formData);
-	}
+	};
 
 	const onImageChange = ({ index, value }) => {
 		const copyImageState = [...images];
 		copyImageState[index] = {
-			error: '',
-			value: value
-		}
-		setImages(copyImageState)
-	}
+			error: "",
+			value: value,
+		};
+		setImages(copyImageState);
+	};
 
-	const afterAddHandler = () => {
-
-	}
-
+	const afterAddHandler = () => {};
 
 	return (
 		<>
@@ -125,7 +140,10 @@ const Equipment = () => {
 				cb={afterAddHandler}
 			/>
 			<Form {...form} className="">
-				<form onSubmit={form.handleSubmit(handleSubmit)} className="mt-8 sm:p-8 p-4 bg-white rounded-lg space-y-2">
+				<form
+					onSubmit={form.handleSubmit(handleSubmit)}
+					className="mt-8 sm:p-8 p-4 bg-white rounded-lg space-y-2"
+				>
 					<div className="flex flex-col lg:flex-row gap-x-5 space-y-2 md:space-y-0">
 						<div className="flex-1 min-h-[116px]">
 							<FormField
@@ -134,7 +152,8 @@ const Equipment = () => {
 								render={({ field }) => (
 									<FormItem className="min-h-[70px]">
 										<FormLabel className="font-normal">
-											Vehicle Identification Number										</FormLabel>
+											Vehicle Identification Number{" "}
+										</FormLabel>
 										<FormControl>
 											<Input
 												className="h-14 focus:outline-none border border-[#acacac] rounded-[10px]"
@@ -417,7 +436,7 @@ const Equipment = () => {
 										</FormLabel>
 										<FormControl>
 											<Input
-												type='date'
+												type="date"
 												className="h-14 focus:outline-none border border-[#acacac] rounded-[10px]"
 												placeholder="xxx xxx xxx xxx"
 												{...field}
@@ -430,7 +449,6 @@ const Equipment = () => {
 						</div>
 					</div>
 					<div className="flex flex-col lg:flex-row gap-x-5 space-y-2 md:space-y-0">
-
 						<div className="flex-1 min-h-[116px]">
 							<FormField
 								control={form.control}
@@ -442,7 +460,7 @@ const Equipment = () => {
 										</FormLabel>
 										<FormControl>
 											<Input
-												type='date'
+												type="date"
 												className="h-14 focus:outline-none border border-[#acacac] rounded-[10px]"
 												placeholder="xxx xxx xxx xxx"
 												{...field}
@@ -531,7 +549,10 @@ const Equipment = () => {
 										<Select
 											className="focus:outline-none border border-[#acacac] rounded-[10px]"
 											onValueChange={field.onChange}
-											value={field.value || data?.data[0]?._id}
+											value={
+												field.value ||
+												data?.data[0]?._id
+											}
 											defaultValue={data?.data[0]?._id}
 										>
 											<FormControl className="h-14 border-[#acacac] rounded-[10px]">
@@ -540,12 +561,16 @@ const Equipment = () => {
 												</SelectTrigger>
 											</FormControl>
 											<SelectContent className="">
-												{(data?.data || []).map((category) => (
-													<SelectItem key={category._id} value={category._id}>
-														{category.name}
-													</SelectItem>
-												))}
-
+												{(data?.data || []).map(
+													(category) => (
+														<SelectItem
+															key={category._id}
+															value={category._id}
+														>
+															{category.name}
+														</SelectItem>
+													)
+												)}
 											</SelectContent>
 										</Select>
 										<FormMessage />
@@ -553,7 +578,6 @@ const Equipment = () => {
 								)}
 							/>
 						</div>
-
 					</div>
 					<div className="flex flex-col lg:flex-row gap-x-5 space-y-2 md:space-y-0">
 						<div className="flex-1 min-h-[116px]">
@@ -582,17 +606,30 @@ const Equipment = () => {
 						{images.map((image, index) => (
 							<div key={index} className="flex gap-x-5 items-end">
 								<div className="flex-1 h-full  min-h-[70px]">
-									<label className="block p-2">Upload Photo</label>
+									<label className="block p-2">
+										Upload Photo
+									</label>
 									<Input
 										type="file"
 										className="h-14 focus:outline-none border border-none rounded-[10px] file:h-12 file:px-4 file:font-medium file:text-[18px] file:text-[#acacac] file:bg-[#acacac34] file:rounded-lg file:mr-5"
 										placeholder="Enter your full name..."
-										onChange={(e) => onImageChange({ index, value: e.target.files[0] })}
+										onChange={(e) =>
+											onImageChange({
+												index,
+												value: e.target.files[0],
+											})
+										}
 									/>
-									<p className="text-[#EF4444]">{image.error}</p>
-
+									<p className="text-[#EF4444]">
+										{image.error}
+									</p>
 								</div>
-								<Button type='button' onClick={() => removeImages(index)}>Remove</Button>
+								<Button
+									type="button"
+									onClick={() => removeImages(index)}
+								>
+									Remove
+								</Button>
 							</div>
 						))}
 					</div>
@@ -600,7 +637,11 @@ const Equipment = () => {
 						<Button className="px-10 bg-theamP w-full lg:w-fit">
 							Submit
 						</Button>
-						<Button onClick={handleAddImageField} type='button' className="ml-5 px-10 bg-theamP w-full lg:w-fit">
+						<Button
+							onClick={handleAddImageField}
+							type="button"
+							className="ml-5 px-10 bg-theamP w-full lg:w-fit"
+						>
 							Add Image Field
 						</Button>
 					</div>
