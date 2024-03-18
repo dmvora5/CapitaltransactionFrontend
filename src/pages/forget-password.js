@@ -1,7 +1,7 @@
 import ForgetPassword from "@/components/Auth/ForgetPassword";
 import Head from "next/head";
 
-const forgetpassword = () => {
+const Forgetpassword = () => {
 	return (
 		<>
 			<Head>
@@ -21,4 +21,4 @@ const forgetpassword = () => {
 	);
 };
 
-export default forgetpassword;
+export default Forgetpassword;

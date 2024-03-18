@@ -1,6 +1,6 @@
 import VerifyOtp from "@/components/Auth/VerifyOtp";
 
-const verify = () => {
+const Verify = () => {
 	return (
 		<div>
 			{/* <main className="min-h-screen flex flex-col sm:flex-row overflow-y-auto">
@@ -80,4 +80,4 @@ const verify = () => {
 	);
 };
 
-export default verify;
+export default Verify;

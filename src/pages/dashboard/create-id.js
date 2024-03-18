@@ -5,7 +5,7 @@ import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-const createId = () => {
+const CreateId = () => {
 	const formSchema = z.object({
 		fullName: z.string().min(2, {
 			message: "fullName must be at least 2 characters.",
@@ -96,4 +96,4 @@ const createId = () => {
 	);
 };
 
-export default createId;
+export default CreateId;
