@@ -1,4 +1,5 @@
 import APICallStatushandler from "@/components/Shared/APICallStatushandler";
+import EllipsisPagination from "@/components/Shared/EllipsisPagination";
 import Loader from "@/components/Shared/Loader";
 import { limit } from "@/constant";
 import { useGetUserPassportQuery } from "@/redux/api/userItemsApi";
