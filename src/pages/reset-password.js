@@ -45,7 +45,7 @@ const Resetpassword = () => {
 				.string({
 					required_error: "please enter a otp",
 				})
-				.min(6, "otp must be 6 charecter long"),
+				.min(4, "otp must be 6 charecter long"),
 			password: z
 				.string({
 					required_error: "please enter a valid password",
