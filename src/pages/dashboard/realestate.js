@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
@@ -25,6 +25,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import dynamic from "next/dynamic";
+const Layout = dynamic(() => import("@/components/Layout"), {
+	ssr: false,
+});
 
 const Realestate = () => {
 	const { data, isLoading, isSuccess, isError, error } =
@@ -128,7 +132,7 @@ const Realestate = () => {
 	};
 
 	return (
-		<>
+		<Layout>
 			{(isLoading || addRealEstateOption.isLoading) && <Loader />}
 			<h2 className="font-medium text-3xl text-[#333333]">Real Estate</h2>
 			<APICallStatushandler
@@ -373,7 +377,7 @@ const Realestate = () => {
 					</div>
 				</form>
 			</Form>
-		</>
+		</Layout>
 	);
 };
 

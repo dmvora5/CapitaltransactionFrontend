@@ -19,9 +19,12 @@ import { useLoginMutation } from "@/redux/api/userApi";
 import Loader from "../Shared/Loader";
 import APICallStatushandler from "../Shared/APICallStatushandler";
 import Cookies from "js-cookie";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/redux/slice/userSlice";
 
 const Login = () => {
 	const router = useRouter();
+	const dispatch = useDispatch();
 
 	const [login, loginOptions] = useLoginMutation();
 
@@ -44,7 +47,8 @@ const Login = () => {
 
 	const afterLoginHandler = (data) => {
 		Cookies.set("currentUser", JSON.stringify(data.data));
-		const redirectPath = Cookies.get('path');
+		const redirectPath = Cookies.get("path");
+		dispatch(setUser(data?.user));
 		router.push(redirectPath || redirect_after_login);
 	};
 

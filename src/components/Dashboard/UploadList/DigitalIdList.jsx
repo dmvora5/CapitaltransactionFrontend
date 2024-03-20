@@ -1,21 +1,15 @@
-import APICallStatushandler from "@/components/Shared/APICallStatushandler";
 import EllipsisPagination from "@/components/Shared/EllipsisPagination";
 import Loader from "@/components/Shared/Loader";
 import { limit } from "@/constant";
-import { useGetUserLicenceQuery } from "@/redux/api/userItemsApi";
-import moment from "moment";
-import React from "react";
+import { useGetUserDigitalIdQuery } from "@/redux/api/userItemsApi";
 
-const LicenceList = () => {
+const DigitalIdList = () => {
 	const { isLoading, data, isSuccess, isError, error } =
-		useGetUserLicenceQuery();
+		useGetUserDigitalIdQuery();
 	return (
 		<>
 			{isLoading && <Loader />}
 			<div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-				<APICallStatushandler
-					options={{ isLoading, data, isSuccess, isError, error }}
-				/>
 				<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 					<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 						<tr>
@@ -26,13 +20,16 @@ const LicenceList = () => {
 								Full Name
 							</th>
 							<th scope="col" className="py-3 px-6 border">
-								Customer Id
+								Card No.
 							</th>
 							<th scope="col" className="py-3 px-6 border">
-								Dob
+								Email
 							</th>
 							<th scope="col" className="py-3 px-6 border">
-								Gender
+								Phone No.
+							</th>
+							<th scope="col" className="py-3 px-6 border">
+								Country
 							</th>
 							<th scope="col" className="py-3 px-6 border">
 								Approval
@@ -50,13 +47,16 @@ const LicenceList = () => {
 									{item.fullName}
 								</td>
 								<td className="py-4 px-6 border">
-									{item.customerId}
+									{item.cardNo}
 								</td>
 								<td className="py-4 px-6 border">
-									{moment(item.dob).format("L")}
+									{item.email}
 								</td>
 								<td className="py-4 px-6 border">
-									{item.gender?.toUpperCase()}
+									{item.phoneNo}
+								</td>
+								<td className="py-4 px-6 border">
+									{item.country}
 								</td>
 								<td className="py-4 px-6 border">
 									<span
@@ -106,4 +106,4 @@ const LicenceList = () => {
 	);
 };
 
-export default LicenceList;
+export default DigitalIdList;

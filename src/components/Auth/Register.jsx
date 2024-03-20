@@ -20,6 +20,7 @@ import Link from "next/link";
 import { useRegisterUserMutation } from "@/redux/api/userApi";
 import Loader from "../Shared/Loader";
 import APICallStatushandler from "../Shared/APICallStatushandler";
+import toast from "react-hot-toast";
 
 const Register = () => {
 	const router = useRouter();
@@ -44,6 +45,7 @@ const Register = () => {
 			})
 			.email("please enter valid email address"),
 		password: z.string().min(2, "password at least 2 characters. long"),
+		aggreTermsAndConditions: z.boolean(),
 	});
 
 	const form = useForm({
@@ -66,6 +68,13 @@ const Register = () => {
 		});
 	};
 
+	const handleRegister = (values) => {
+		if (!values.aggreTermsAndConditions) {
+			return toast.error("Please Accept terms and condition");
+		}
+		register(values);
+	};
+
 	return (
 		<div className="text-white space-y-10 sm:w-11/12">
 			{registerOption.isLoading && <Loader />}
@@ -77,7 +86,7 @@ const Register = () => {
 			<Form {...form}>
 				<form
 					className="space-y-8"
-					onSubmit={form.handleSubmit(register)}
+					onSubmit={form.handleSubmit(handleRegister)}
 				>
 					<FormField
 						className=""
@@ -99,7 +108,6 @@ const Register = () => {
 					/>
 					<div className="flex gap-x-4">
 						<FormField
-							type="number"
 							control={form.control}
 							name="countryCode"
 							render={({ field }) => (
@@ -108,7 +116,7 @@ const Register = () => {
 									<FormControl>
 										<Input
 											className="bg-transparent pl-0 rounded-none placeholder:text-white border-t-0 border-x-0 border-b-2 outline-none "
-											placeholder="Country code"
+											placeholder="+1"
 											{...field}
 										/>
 									</FormControl>
@@ -125,7 +133,7 @@ const Register = () => {
 									<FormControl>
 										<Input
 											className="bg-transparent pl-0 rounded-none placeholder:text-white border-t-0 border-x-0 border-b-2 outline-none "
-											placeholder="+1"
+											placeholder="Phone Number"
 											{...field}
 										/>
 									</FormControl>
@@ -144,7 +152,7 @@ const Register = () => {
 									<Input
 										type="email"
 										className="bg-transparent pl-0 rounded-none placeholder:text-white border-t-0 border-x-0 border-b-2 outline-none "
-										placeholder="Email"
+										placeholder="Email Address"
 										{...field}
 									/>
 								</FormControl>
@@ -171,12 +179,18 @@ const Register = () => {
 						)}
 					/>
 					<div className="flex items-center space-x-4">
-						<Checkbox className="border-white" id="terms" />
+						<Checkbox
+							onCheckedChange={(e) =>
+								form.setValue("aggreTermsAndConditions", e)
+							}
+							className="border-white"
+							id="terms"
+						/>
 						<label
 							htmlFor="terms"
 							className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 						>
-							Accept terms and conditions
+							I agree to the terms and conditions
 						</label>
 					</div>
 
@@ -188,7 +202,7 @@ const Register = () => {
 					</Button>
 				</form>
 				<Link className="block" href="/login">
-					Already Have&apos;n account ? Go Login
+					Already have an account ? Go Login
 				</Link>
 			</Form>
 		</div>

@@ -30,10 +30,15 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
 import { KeyIcon } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+const Layout = dynamic(() => import("@/components/Layout"), {
+	ssr: false,
+});
 
 const ChagePasswordModel = () => {
 	const router = useRouter();
@@ -92,6 +97,7 @@ const ChagePasswordModel = () => {
 										<FormLabel>Old Password</FormLabel>
 										<FormControl>
 											<Input
+												type="password"
 												className="h-14 focus:outline-none border border-[#acacac] rounded-[10px]"
 												placeholder="User name"
 												{...field}
@@ -112,6 +118,7 @@ const ChagePasswordModel = () => {
 										<FormLabel>New Password</FormLabel>
 										<FormControl>
 											<Input
+												type="password"
 												className="h-14 focus:outline-none border border-[#acacac] rounded-[10px]"
 												placeholder="User name"
 												{...field}
@@ -131,7 +138,7 @@ const ChagePasswordModel = () => {
 									type="button"
 									className="w-36 rounded-xl bg-[#acacac]"
 								>
-									Cancle
+									Cancel
 								</Button>
 							</DialogClose>
 						</div>
@@ -197,7 +204,7 @@ const Profile = () => {
 	};
 
 	return (
-		<>
+		<Layout>
 			<h2 className="font-medium text-3xl text-[#333333]">
 				Profile Settings
 			</h2>
@@ -316,7 +323,7 @@ const Profile = () => {
 					</Form>
 				</div>
 			</div>
-		</>
+		</Layout>
 	);
 };
 

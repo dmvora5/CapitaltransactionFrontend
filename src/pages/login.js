@@ -1,4 +1,5 @@
 import Login from "@/components/Auth/Login";
+import { PATH } from "@/path";
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
@@ -37,7 +38,7 @@ const LoginPage = () => {
 								consequat.
 							</p>
 							<Link
-								href="/"
+								href={PATH.register}
 								className="bg-theamP  w-1/3 sm:w-52 py-2 block text-white rounded-md text-center"
 							>
 								Register

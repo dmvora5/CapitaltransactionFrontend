@@ -23,6 +23,11 @@ import { useAddPassportMutation } from "@/redux/api/userItemsApi";
 import Loader from "@/components/Shared/Loader";
 import APICallStatushandler from "@/components/Shared/APICallStatushandler";
 import toast from "react-hot-toast";
+import dynamic from "next/dynamic";
+
+const Layout = dynamic(() => import("@/components/Layout"), {
+	ssr: false,
+});
 
 const Passport = () => {
 	const [image, setImage] = useState();
@@ -77,7 +82,7 @@ const Passport = () => {
 	};
 
 	return (
-		<>
+		<Layout>
 			{addPassportOption.isLoading && <Loader />}
 			<h2 className="font-medium text-3xl text-[#333333]">Passport</h2>
 			<APICallStatushandler
@@ -308,7 +313,7 @@ const Passport = () => {
 					</div>
 				</form>
 			</Form>
-		</>
+		</Layout>
 	);
 };
 

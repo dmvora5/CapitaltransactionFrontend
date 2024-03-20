@@ -8,9 +8,11 @@ export const userItemApi = createApi({
 		"UserItems",
 		"Licence",
 		"Passport",
+		"DigitalId",
 		"RealEstate",
 		"Equipment",
 		"Notification",
+		"RealEstate",
 	],
 	endpoints: (build) => ({
 		addDrivingLicence: build.mutation({
@@ -102,6 +104,91 @@ export const userItemApi = createApi({
 			}),
 			invalidatesTags: ["Notification"],
 		}),
+
+		//digital id
+		addDigitalId: build.mutation({
+			query: (payload) => ({
+				url: "user/digitalId",
+				method: "POST",
+				body: payload,
+			}),
+			invalidatesTags: ["UserItems", "DigitalId"],
+		}),
+		getUserDigitalId: build.query({
+			query: () => ({
+				url: "user/digitalId",
+			}),
+			providesTags: ["DigitalId"],
+		}),
+
+		//listing on Marketplace
+		listingEquipmentOnMarket: build.mutation({
+			query: (payload) => ({
+				url: "market/equipment",
+				method: "POST",
+				body: payload,
+			}),
+			invalidatesTags: ["Equipment"],
+		}),
+		listingRealEstateOnMarket: build.mutation({
+			query: (payload) => ({
+				url: "market/realestate",
+				method: "POST",
+				body: payload,
+			}),
+			invalidatesTags: ["RealEstate", "RealEstate"],
+		}),
+
+		//market listing
+		getAllEquipmentOnMarket: build.query({
+			query: (payload) => ({
+				url: "market/equipment",
+				params: payload,
+			}),
+			providesTags: (result, error, args) =>
+				result?.data
+					? [
+							...(result?.data || []).map(({ _id }) => ({
+								type: "Equipment",
+								_id,
+							})),
+							"Equipment",
+					  ]
+					: ["Equipment"],
+		}),
+		getAllRealEstateOnMarket: build.query({
+			query: (payload) => ({
+				url: "market/realestate",
+				params: payload,
+			}),
+			providesTags: (result, error, args) =>
+				result?.data
+					? [
+							...(result?.data || []).map(({ _id }) => ({
+								type: "RealEstate",
+								_id,
+							})),
+							"RealEstate",
+					  ]
+					: ["RealEstate"],
+		}),
+
+		getEquipmentOnMarket: build.query({
+			query: (payload) => ({
+				url: `market/equipment/${payload}`,
+			}),
+			providesTags: (result, error, arg) => [
+				{ type: "Equipment", _id: arg },
+			],
+		}),
+		getRealEstateOnMarket: build.query({
+			query: (payload) => ({
+				url: `market/realestate/${payload}`,
+			}),
+			providesTags: (result, error, arg) => [
+				{ type: "RealEstate", _id: arg },
+			],
+		}),
 	}),
 });
 
@@ -118,4 +205,18 @@ export const {
 	useGetUserEquipmentQuery,
 	useGetUserNotificationQuery,
 	useViewNotioficationMutation,
+
+	//digitalId
+	useAddDigitalIdMutation,
+	useGetUserDigitalIdQuery,
+
+	//market
+	useListingEquipmentOnMarketMutation,
+	useListingRealEstateOnMarketMutation,
+
+	useGetAllEquipmentOnMarketQuery,
+	useGetAllRealEstateOnMarketQuery,
+	//
+	useGetEquipmentOnMarketQuery,
+	useGetRealEstateOnMarketQuery,
 } = userItemApi;

@@ -74,6 +74,7 @@ module.exports = {
 			},
 			backgroundImage: {
 				"back-image": "url('/images/background.png')",
+				"market-back-image": "url('/images/MarketHero.svg')",
 			},
 		},
 	},

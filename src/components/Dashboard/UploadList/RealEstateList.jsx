@@ -2,21 +2,132 @@ import APICallStatushandler from "@/components/Shared/APICallStatushandler";
 import EllipsisPagination from "@/components/Shared/EllipsisPagination";
 import Loader from "@/components/Shared/Loader";
 import { limit } from "@/constant";
-import { useGetUserRealEstateQuery } from "@/redux/api/userItemsApi";
+import {
+	useGetUserRealEstateQuery,
+	useListingRealEstateOnMarketMutation,
+} from "@/redux/api/userItemsApi";
 import React, { useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const RealEstateList = () => {
 	const [page, setPage] = useState(1);
+	const [open, setOpen] = useState(false);
+	const [id, setId] = useState();
 
 	const { isLoading, data, isSuccess, isError, error } =
 		useGetUserRealEstateQuery();
+
+	const [submit, statusOption] = useListingRealEstateOnMarketMutation();
+
+	const handleDialogOpen = (id) => {
+		setId(id);
+		setOpen(true);
+	};
+
+	const handleDialogClose = () => {
+		setId();
+		setOpen(false);
+	};
+
+	const afterHandler = () => {
+		setOpen(false);
+	};
+
+	const ListingModel = () => {
+		const formSchema = z.object({
+			price: z.string(),
+		});
+
+		const form = useForm({
+			resolver: zodResolver(formSchema),
+			defaultValues: {},
+		});
+
+		const handleSubmit = (values) => {
+			submit({
+				...values,
+				id,
+			});
+		};
+
+		return (
+			<Dialog open={open}>
+				<DialogContent
+					closeBtn={false}
+					className="sm:max-w-[700px] p-0"
+				>
+					<span className="p-5 border-b font-medium text-xl">
+						Listing On MarketPlace
+					</span>
+					<Form {...form}>
+						<form
+							onSubmit={form.handleSubmit(handleSubmit)}
+							className="space-y-4 px-8 pb-8 border-b"
+						>
+							<div className="">
+								<FormField
+									className=""
+									control={form.control}
+									name="price"
+									render={({ field }) => (
+										<FormItem className="min-h-[70px]">
+											<FormLabel>Price</FormLabel>
+											<FormControl>
+												<Input
+													type="number"
+													className="h-14 focus:outline-none border border-[#acacac] rounded-[10px]"
+													placeholder=""
+													{...field}
+												/>
+											</FormControl>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							</div>
+							<div className="p-5 flex gap-x-4 justify-center">
+								<Button className="w-36 rounded-xl bg-theamP">
+									Save
+								</Button>
+
+								<Button
+									onClick={handleDialogClose}
+									type="button"
+									className="w-36 rounded-xl bg-[#acacac]"
+								>
+									Cancel
+								</Button>
+							</div>
+						</form>
+					</Form>
+				</DialogContent>
+			</Dialog>
+		);
+	};
 	return (
 		<>
-			{isLoading && <Loader />}
+			{(isLoading || statusOption.isLoading) && <Loader />}
+			<ListingModel />
+			<APICallStatushandler
+				options={statusOption}
+				cb={afterHandler}
+				errorCb={() => setOpen(false)}
+			/>
 			<div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-				<APICallStatushandler
-					options={{ isLoading, data, isSuccess, isError, error }}
-				/>
 				<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 					<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 						<tr>
@@ -53,7 +164,7 @@ const RealEstateList = () => {
 									{item.fullName}
 								</td>
 								<td className="py-4 px-6 border">
-									{item.location}
+									{item.location?.coordinates?.join(",")}
 								</td>
 								<td className="py-4 px-6 border">
 									{item.address?.slice(0, 10)}...
@@ -61,7 +172,7 @@ const RealEstateList = () => {
 								<td className="py-4 px-6 border">
 									{item.email}
 								</td>
-								<td className="py-4 px-6 border">
+								<td className="py-4 px-6 border flex justify-center items-center gap-x-4">
 									<span
 										className={`inline-flex rounded-full px-3 py-1 text-sm font-semibold leading-tight ${
 											item.verifyed
@@ -71,6 +182,16 @@ const RealEstateList = () => {
 									>
 										{item.verifyed ? "Verified" : "Pending"}
 									</span>
+									{item.verifyed && (
+										<Button
+											onClick={() =>
+												handleDialogOpen(item._id)
+											}
+											size="sm"
+										>
+											List
+										</Button>
+									)}
 								</td>
 							</tr>
 						))}

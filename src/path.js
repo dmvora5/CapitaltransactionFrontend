@@ -4,6 +4,7 @@ export const PATH = {
 	forgetpassword: "/forget-password",
 	resetPassword: "/reset-password",
 	register: "/register",
+	marketItemDetails: "/marketplace/equipment",
 };
 
 export const protectedRoutes = [

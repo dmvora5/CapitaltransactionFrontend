@@ -25,6 +25,10 @@ import {
 } from "@/redux/api/userItemsApi";
 import APICallStatushandler from "@/components/Shared/APICallStatushandler";
 import Loader from "@/components/Shared/Loader";
+import dynamic from "next/dynamic";
+const Layout = dynamic(() => import("@/components/Layout"), {
+	ssr: false,
+});
 
 const Equipment = () => {
 	const [images, setImages] = useState([
@@ -127,7 +131,7 @@ const Equipment = () => {
 	const afterAddHandler = () => {};
 
 	return (
-		<>
+		<Layout>
 			<h2 className="font-medium text-3xl text-[#333333]">
 				Car Registration
 			</h2>
@@ -647,7 +651,7 @@ const Equipment = () => {
 					</div>
 				</form>
 			</Form>
-		</>
+		</Layout>
 	);
 };
 

@@ -13,6 +13,7 @@ import {
 	Scroll,
 	Search,
 	Settings,
+	ShoppingBag,
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -29,6 +30,8 @@ import {
 	useViewNotioficationMutation,
 } from "@/redux/api/userItemsApi";
 import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
+import { userState } from "@/redux/slice/userSlice";
 
 const Menu = [
 	{
@@ -70,6 +73,11 @@ const Menu = [
 		name: "Setting",
 		Icon: Settings,
 		path: "/dashboard/profile",
+	},
+	{
+		name: "MarketPlace",
+		Icon: ShoppingBag,
+		path: "/marketplace/equipment",
 	},
 ];
 
@@ -220,12 +228,7 @@ const SearchSection = ({ classNames }) => {
 const Layout = ({ children }) => {
 	const router = useRouter();
 
-	const { data, isLoading, isError, error, isSuccess } = useUserDetailsQuery(
-		{},
-		{
-			skip: authFlowRoutes.includes(router.pathname),
-		}
-	);
+	const { user } = useSelector(userState);
 
 	const [show, setShow] = useState(true);
 	const [itemShow, setItemShow] = useState(true);
@@ -246,10 +249,6 @@ const Layout = ({ children }) => {
 
 	return (
 		<div className="flex flex-col md:flex-row min-h-screen">
-			{isLoading && <Loader />}
-			<APICallStatushandler
-				options={{ data, isLoading, isError, error, isSuccess }}
-			/>
 			<header className={cn("container h-[135px] md:hidden py-4 px-3")}>
 				<div className="flex h-1/2 items-center">
 					<h2 className="w-1/2 font-bold text-theamP">
@@ -258,10 +257,10 @@ const Layout = ({ children }) => {
 					<BackSection
 						classNames="w-1/2"
 						isMobile={true}
-						user={data?.data}
+						user={user}
 					/>
 				</div>
-				{/* <SearchSection /> */}
+				<SearchSection />
 			</header>
 			<aside
 				className={cn(
@@ -334,10 +333,10 @@ const Layout = ({ children }) => {
 							onClick={handleShow}
 							className="h-[40px] text-[#acacac] w-[100px] cursor-pointer"
 						/>
-						{/* <SearchSection /> */}
+						<SearchSection />
 					</div>
 					<BackSection
-						user={data?.data}
+						user={user}
 						classNames="sm:w-[30%] md:w-1/2 xl:w-1/5"
 					/>
 				</div>

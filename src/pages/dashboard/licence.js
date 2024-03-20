@@ -23,6 +23,10 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import toast from "react-hot-toast";
+import dynamic from "next/dynamic";
+const Layout = dynamic(() => import("@/components/Layout"), {
+	ssr: false,
+});
 
 const Licence = () => {
 	const [submit, addLicenceOption] = useAddDrivingLicenceMutation();
@@ -74,7 +78,7 @@ const Licence = () => {
 	};
 
 	return (
-		<>
+		<Layout>
 			{addLicenceOption.isLoading && <Loader />}
 			<h2 className="font-medium text-3xl text-[#333333]">
 				Driver Licences
@@ -237,8 +241,8 @@ const Licence = () => {
 								name="frontImage"
 								render={({ field }) => (
 									<FormItem className="min-h-[70px]">
-										<FormLabel className="font-normal">
-											Image
+										<FormLabel className="font-normal text-base">
+											Upload Image
 										</FormLabel>
 										<FormControl>
 											<Input
@@ -254,7 +258,6 @@ const Licence = () => {
 									</FormItem>
 								)}
 							/>
-							<label className="block p-2">Upload Document</label>
 						</div>
 						{/* <div className="w-1/2 h-full">
 							<label className="block p-2">Upload Document</label>
@@ -272,7 +275,7 @@ const Licence = () => {
 					</div>
 				</form>
 			</Form>
-		</>
+		</Layout>
 	);
 };
 
