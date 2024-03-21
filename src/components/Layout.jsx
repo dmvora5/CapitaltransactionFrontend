@@ -23,8 +23,7 @@ import { Badge } from "./ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Button } from "./ui/button";
 import { useLogoutMutation, useUserDetailsQuery } from "@/redux/api/userApi";
-import Loader from "./Shared/Loader";
-import APICallStatushandler from "./Shared/APICallStatushandler";
+
 import {
 	useGetUserNotificationQuery,
 	useViewNotioficationMutation,
@@ -39,11 +38,11 @@ const Menu = [
 		Icon: LayoutDashboard,
 		path: "/dashboard/managment",
 	},
-	// {
-	// 	name: "ID Creation",
-	// 	Icon: NotebookPen,
-	// 	path: "/dashboard/create-id",
-	// },
+	{
+		name: "ID Creation",
+		Icon: NotebookPen,
+		path: "/dashboard/create-id",
+	},
 	{
 		name: "Drivers's Licence",
 		Icon: CreditCard,

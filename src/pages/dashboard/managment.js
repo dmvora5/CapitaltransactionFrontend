@@ -20,20 +20,27 @@ const Managment = () => {
 			</h2>
 			<div className="flex gap-8 flex-col sm:flex-row flex-wrap mt-8">
 				<div className="sm:w-full lg:w-[47%] xl:w-[31%] shadow-md rounded-lg h-[125px] bg-white p-2 md:p-4  flex">
-					<Dialog>
-						<DialogTrigger asChild>
-							<img
-								src="/images/DrivingLicence.svg"
-								className="w-1/4 object-fill cursor-pointer object-center h-full rounded-lg"
-							/>
-						</DialogTrigger>
-						<DialogContent className="p-0 sm:h-full">
-							<img
-								className="object-cover object-center h-full"
-								src={data?.data?.digitalIdImage}
-							/>
-						</DialogContent>
-					</Dialog>
+					{data?.data?.digitalIdImage ?
+						<Dialog>
+							<DialogTrigger asChild>
+								<img
+									src="/images/DigitalId.svg"
+									className="w-1/4 object-fill cursor-pointer object-center h-full rounded-lg"
+								/>
+							</DialogTrigger>
+							<DialogContent className="p-0 sm:h-full">
+								<img
+									className="object-cover object-center h-full"
+									src={data?.data?.digitalIdImage}
+								/>
+							</DialogContent>
+						</Dialog>
+						:
+						<img
+							src="/images/DrivingLicence.svg"
+							className="w-1/4 object-fill cursor-pointer object-center h-full rounded-lg"
+						/>
+					}
 					<div className="flex-1 pl-1 sm:px-4">
 						<h2 className="py-2 text-xl text-[#acacac] font-medium">
 							Digital ID Creation
@@ -44,20 +51,27 @@ const Managment = () => {
 					</div>
 				</div>
 				<div className="sm:w-full lg:w-[47%] xl:w-[31%] shadow-md rounded-lg  h-[125px] bg-white p-2 md:p-4 flex">
-					<Dialog>
-						<DialogTrigger asChild>
-							<img
-								src="/images/DrivingLicence.svg"
-								className="w-1/4 object-fill cursor-pointer object-center h-full rounded-lg"
-							/>
-						</DialogTrigger>
-						<DialogContent className="p-0 sm:h-full">
-							<img
-								className="object-cover object-center h-full"
-								src={data?.data?.licenceImage}
-							/>
-						</DialogContent>
-					</Dialog>
+					{data?.data?.licenceImage ?
+						<Dialog>
+							<DialogTrigger asChild>
+								<img
+									src="/images/DrivingLicence.svg"
+									className="w-1/4 object-fill cursor-pointer object-center h-full rounded-lg"
+								/>
+							</DialogTrigger>
+							<DialogContent className="p-0 sm:h-full">
+								<img
+									className="object-cover object-center h-full"
+									src={data?.data?.licenceImage}
+								/>
+							</DialogContent>
+						</Dialog>
+						:
+						<img
+							src="/images/DrivingLicence.svg"
+							className="w-1/4 object-fill cursor-pointer object-center h-full rounded-lg"
+						/>
+					}
 
 					<div className="flex-1 pl-1 sm:px-4 ">
 						<h2 className="py-2 text-xl text-[#acacac] font-medium">
