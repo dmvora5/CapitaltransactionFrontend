@@ -16,12 +16,11 @@ export const protectedRoutes = [
 	"/dashboard/equipment",
 	"/dashboard/uploadlist",
 	"/dashboard/profile",
-	"/",
 ];
 
-export const authRoutes = ["/login"];
+export const authRoutes = ["/login", "/"];
 
-export const withoutLayoutRoutes = ["/"];
+export const withoutLayoutRoutes = [];
 
 export const authFlowRoutes = [
 	"/login",
@@ -30,6 +29,7 @@ export const authFlowRoutes = [
 	"/register",
 	"/verifyemail",
 	"/reset-password",
+	"/"
 ];
 
 export const redirect_after_login = "/dashboard/managment";

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { PATH } from "@/path";
 import Header from "@/components/Shared/Header";
 import { Button } from "@/components/ui/button";
+import Login from "@/components/Auth/Login";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,173 +26,220 @@ export default function Home() {
 				/>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<main className="min-h-screen w-full">
-				<Header />
-				<section className="w-full h-[500px] md:h-[700px] bg-back-image bg-no-repeat bg-cover flex items-center">
-					<div className="px-4 sm:px-0 sm:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-between sm:ml-24 space-y-6">
-						<div className="space-y-6">
-							<h1 className="font-medium text-3xl sm:text-6xl text-white">
-								Welcome to Digital ID
-							</h1>
-							<p className="text-[#acacac]">
+			<main className="min-h-screen flex flex-col sm:flex-row overflow-y-auto">
+				<div className="min-h-96 md:w-7/12 flex flex-col py-15 px-11 md:py-20 md:px-16">
+					<h1 className="font-bold text-3xl md:text-5xl py-5 text-theamP">
+						Capital Transactions
+					</h1>
+					<div className="flex-1 flex flex-col justify-center">
+						<div className="space-y-6 px-1 py-5">
+							<h2 className="text-3xl md:text-6xl">
+								Welcome Back !
+							</h2>
+							<p className="md:w-8/12">
 								Lorem ipsum dolor sit amet, consectetur
 								adipiscing elit, sed do eiusmod tempor
 								incididunt ut labore et dolore magna aliqua. Ut
 								enim ad minim veniam, quis nostrud exercitation
 								ullamco laboris nisi ut aliquip ex ea commodo
-								consequat.{" "}
+								consequat.
 							</p>
-						</div>
-						<Button className="w-[200px] bg-theamP rounded-lg">
-							Get Start
-						</Button>
-					</div>
-				</section>
-				<section className="py-8 px-6 md:py-28 md:px-24 space-y-40">
-					<div className="space-y-4 text-center">
-						<h3 className="text-theamP font-medium text-[20px] tracking-widest">
-							All Digital ID
-						</h3>
-						<h2 className="font-semibold text-5xl">
-							Document Categories
-						</h2>
-					</div>
-					<div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 lg:grid-rows-2 gap-x-6 gap-y-20">
-						<div className="relative min-h-80 ">
-							<img
-								className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
-								src="/images/Id.svg"
-							/>
-							<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
-								<h2 className="text-center font-medium text-xl py-2">
-									Id Creation
-								</h2>
-								<p className="text-lg text-[#acacac] pb-16">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do.
-								</p>
-							</div>
-						</div>
-						<div className="relative min-h-80 ">
-							<img
-								className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
-								src="/images/Id.svg"
-							/>
-							<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
-								<h2 className="text-center font-medium text-xl py-2">
-									Id Creation
-								</h2>
-								<p className="text-lg text-[#acacac] pb-16">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do.
-								</p>
-							</div>
-						</div>
-						<div className="relative min-h-80 ">
-							<img
-								className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
-								src="/images/Id.svg"
-							/>
-							<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
-								<h2 className="text-center font-medium text-xl py-2">
-									Id Creation
-								</h2>
-								<p className="text-lg text-[#acacac] pb-16">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do.
-								</p>
-							</div>
-						</div>
-						<div className="relative min-h-80 ">
-							<img
-								className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
-								src="/images/Id.svg"
-							/>
-							<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
-								<h2 className="text-center font-medium text-xl py-2">
-									Id Creation
-								</h2>
-								<p className="text-lg text-[#acacac] pb-16">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do.
-								</p>
-							</div>
-						</div>
-						<div className="relative min-h-80 ">
-							<img
-								className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
-								src="/images/Id.svg"
-							/>
-							<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
-								<h2 className="text-center font-medium text-xl py-2">
-									Id Creation
-								</h2>
-								<p className="text-lg text-[#acacac] pb-16">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do.
-								</p>
-							</div>
-						</div>
-						<div className="relative min-h-80 ">
-							<img
-								className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
-								src="/images/Id.svg"
-							/>
-							<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
-								<h2 className="text-center font-medium text-xl py-2">
-									Id Creation
-								</h2>
-								<p className="text-lg text-[#acacac] pb-16">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do.
-								</p>
-							</div>
-						</div>
-						<div className="relative min-h-80 ">
-							<img
-								className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
-								src="/images/Id.svg"
-							/>
-							<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
-								<h2 className="text-center font-medium text-xl py-2">
-									Id Creation
-								</h2>
-								<p className="text-lg text-[#acacac] pb-16">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do.
-								</p>
-							</div>
-						</div>
-						<div className="relative min-h-80 ">
-							<img
-								className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
-								src="/images/Id.svg"
-							/>
-							<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
-								<h2 className="text-center font-medium text-xl py-2">
-									Id Creation
-								</h2>
-								<p className="text-lg text-[#acacac] pb-16">
-									Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do.
-								</p>
-							</div>
+							<Link
+								href={PATH.register}
+								className="bg-theamP  w-1/3 sm:w-52 py-2 block text-white rounded-md text-center"
+							>
+								Register
+							</Link>
 						</div>
 					</div>
-				</section>
-				<section className="bg-theamP relative">
-					<img
-						className="absolute  bottom-0 left-0"
-						src="/images/dots.svg"
-					/>
-					<div className="py-12 px-32 flex justify-between mx-auto">
-						<img src="/images/left-mobile.svg" />
-						<div className="sm:w-1/2">
-							<p className="text-white">All Steps</p>
-						</div>
-					</div>
-				</section>
+				</div>
+				<div className="flex flex-1 flex-col justify-center items-center bg-theamP px-10">
+					<Login />
+				</div>
 			</main>
 		</>
 	);
+	// return (
+	// 	<>
+	// 		<Head>
+	// 			<title>Capital Transaction | register</title>
+	// 			<meta
+	// 				name="description"
+	// 				content="Generated by create next app"
+	// 			/>
+	// 			<meta
+	// 				name="viewport"
+	// 				content="width=device-width, initial-scale=1"
+	// 			/>
+	// 			<link rel="icon" href="/favicon.ico" />
+	// 		</Head>
+	// 		<main className="min-h-screen w-full">
+	// 			<Header />
+	// 			<section className="w-full h-[500px] md:h-[700px] bg-back-image bg-no-repeat bg-cover flex items-center">
+	// 				<div className="px-4 sm:px-0 sm:w-1/2 lg:w-1/3 min-h-[300px] flex flex-col justify-between sm:ml-24 space-y-6">
+	// 					<div className="space-y-6">
+	// 						<h1 className="font-medium text-3xl sm:text-6xl text-white">
+	// 							Welcome to Digital ID
+	// 						</h1>
+	// 						<p className="text-[#acacac]">
+	// 							Lorem ipsum dolor sit amet, consectetur
+	// 							adipiscing elit, sed do eiusmod tempor
+	// 							incididunt ut labore et dolore magna aliqua. Ut
+	// 							enim ad minim veniam, quis nostrud exercitation
+	// 							ullamco laboris nisi ut aliquip ex ea commodo
+	// 							consequat.{" "}
+	// 						</p>
+	// 					</div>
+	// 					<Button className="w-[200px] bg-theamP rounded-lg">
+	// 						Get Start
+	// 					</Button>
+	// 				</div>
+	// 			</section>
+	// 			<section className="py-8 px-6 md:py-28 md:px-24 space-y-40">
+	// 				<div className="space-y-4 text-center">
+	// 					<h3 className="text-theamP font-medium text-[20px] tracking-widest">
+	// 						All Digital ID
+	// 					</h3>
+	// 					<h2 className="font-semibold text-5xl">
+	// 						Document Categories
+	// 					</h2>
+	// 				</div>
+	// 				<div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 lg:grid-rows-2 gap-x-6 gap-y-20">
+	// 					<div className="relative min-h-80 ">
+	// 						<img
+	// 							className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
+	// 							src="/images/Id.svg"
+	// 						/>
+	// 						<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
+	// 							<h2 className="text-center font-medium text-xl py-2">
+	// 								Id Creation
+	// 							</h2>
+	// 							<p className="text-lg text-[#acacac] pb-16">
+	// 								Lorem ipsum dolor sit amet, consectetur
+	// 								adipiscing elit, sed do.
+	// 							</p>
+	// 						</div>
+	// 					</div>
+	// 					<div className="relative min-h-80 ">
+	// 						<img
+	// 							className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
+	// 							src="/images/Id.svg"
+	// 						/>
+	// 						<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
+	// 							<h2 className="text-center font-medium text-xl py-2">
+	// 								Id Creation
+	// 							</h2>
+	// 							<p className="text-lg text-[#acacac] pb-16">
+	// 								Lorem ipsum dolor sit amet, consectetur
+	// 								adipiscing elit, sed do.
+	// 							</p>
+	// 						</div>
+	// 					</div>
+	// 					<div className="relative min-h-80 ">
+	// 						<img
+	// 							className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
+	// 							src="/images/Id.svg"
+	// 						/>
+	// 						<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
+	// 							<h2 className="text-center font-medium text-xl py-2">
+	// 								Id Creation
+	// 							</h2>
+	// 							<p className="text-lg text-[#acacac] pb-16">
+	// 								Lorem ipsum dolor sit amet, consectetur
+	// 								adipiscing elit, sed do.
+	// 							</p>
+	// 						</div>
+	// 					</div>
+	// 					<div className="relative min-h-80 ">
+	// 						<img
+	// 							className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
+	// 							src="/images/Id.svg"
+	// 						/>
+	// 						<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
+	// 							<h2 className="text-center font-medium text-xl py-2">
+	// 								Id Creation
+	// 							</h2>
+	// 							<p className="text-lg text-[#acacac] pb-16">
+	// 								Lorem ipsum dolor sit amet, consectetur
+	// 								adipiscing elit, sed do.
+	// 							</p>
+	// 						</div>
+	// 					</div>
+	// 					<div className="relative min-h-80 ">
+	// 						<img
+	// 							className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
+	// 							src="/images/Id.svg"
+	// 						/>
+	// 						<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
+	// 							<h2 className="text-center font-medium text-xl py-2">
+	// 								Id Creation
+	// 							</h2>
+	// 							<p className="text-lg text-[#acacac] pb-16">
+	// 								Lorem ipsum dolor sit amet, consectetur
+	// 								adipiscing elit, sed do.
+	// 							</p>
+	// 						</div>
+	// 					</div>
+	// 					<div className="relative min-h-80 ">
+	// 						<img
+	// 							className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
+	// 							src="/images/Id.svg"
+	// 						/>
+	// 						<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
+	// 							<h2 className="text-center font-medium text-xl py-2">
+	// 								Id Creation
+	// 							</h2>
+	// 							<p className="text-lg text-[#acacac] pb-16">
+	// 								Lorem ipsum dolor sit amet, consectetur
+	// 								adipiscing elit, sed do.
+	// 							</p>
+	// 						</div>
+	// 					</div>
+	// 					<div className="relative min-h-80 ">
+	// 						<img
+	// 							className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
+	// 							src="/images/Id.svg"
+	// 						/>
+	// 						<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
+	// 							<h2 className="text-center font-medium text-xl py-2">
+	// 								Id Creation
+	// 							</h2>
+	// 							<p className="text-lg text-[#acacac] pb-16">
+	// 								Lorem ipsum dolor sit amet, consectetur
+	// 								adipiscing elit, sed do.
+	// 							</p>
+	// 						</div>
+	// 					</div>
+	// 					<div className="relative min-h-80 ">
+	// 						<img
+	// 							className="absolute left-[50%] translate-x-[-50%] top-[-20%]"
+	// 							src="/images/Id.svg"
+	// 						/>
+	// 						<div className="bg-[#f7f7f9] min-h-72 min-w-72 px-8 flex flex-col justify-end border-b-[20px] rounded-2xl">
+	// 							<h2 className="text-center font-medium text-xl py-2">
+	// 								Id Creation
+	// 							</h2>
+	// 							<p className="text-lg text-[#acacac] pb-16">
+	// 								Lorem ipsum dolor sit amet, consectetur
+	// 								adipiscing elit, sed do.
+	// 							</p>
+	// 						</div>
+	// 					</div>
+	// 				</div>
+	// 			</section>
+	// 			<section className="bg-theamP relative">
+	// 				<img
+	// 					className="absolute  bottom-0 left-0"
+	// 					src="/images/dots.svg"
+	// 				/>
+	// 				<div className="py-12 px-32 flex justify-between mx-auto">
+	// 					<img src="/images/left-mobile.svg" />
+	// 					<div className="sm:w-1/2">
+	// 						<p className="text-white">All Steps</p>
+	// 					</div>
+	// 				</div>
+	// 			</section>
+	// 		</main>
+	// 	</>
+	// );
 }

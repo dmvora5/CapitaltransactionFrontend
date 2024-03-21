@@ -247,8 +247,8 @@ const Layout = ({ children }) => {
 	}
 
 	return (
-		<div className="flex flex-col md:flex-row min-h-screen">
-			<header className={cn("container h-[135px] md:hidden py-4 px-3")}>
+		<div className="flex flex-col md:flex-row h-screen overflow-hidden">
+			<header className={cn("container h-[135px] md:hidden py-4 px-3 top-0")}>
 				<div className="flex h-1/2 items-center">
 					<h2 className="w-1/2 font-bold text-theamP">
 						Capital Transactions
@@ -339,7 +339,7 @@ const Layout = ({ children }) => {
 						classNames="sm:w-[30%] md:w-1/2 xl:w-1/5"
 					/>
 				</div>
-				<div className="bg-[#acacac34] flex-1 p-4 sm:p-7">
+				<div className="bg-[#acacac34] overflow-auto flex-1 p-4 sm:p-7">
 					{children}
 				</div>
 			</section>

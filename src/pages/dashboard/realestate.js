@@ -361,18 +361,15 @@ const Realestate = () => {
 						))}
 					</div>
 					<div className="text-center py-5">
-						<Button
-							type="submit"
-							className="px-10 bg-theamP w-full lg:w-fit"
-						>
+						<Button className="px-10 bg-theamP w-full lg:w-fit">
 							Submit
 						</Button>
 						<Button
 							onClick={handleAddImageField}
 							type="button"
-							className="px-10 bg-theamP w-full lg:w-fit"
+							className="ml-5 px-10 bg-theamP w-full lg:w-fit"
 						>
-							Append
+							Add Image Field
 						</Button>
 					</div>
 				</form>
